@@ -1,4 +1,4 @@
-import { getTickets } from "../hooks/hooks";
+import getTickets from "../hooks/hooks";
 
 export default async function TicketList() {
   const tickets = await getTickets();
