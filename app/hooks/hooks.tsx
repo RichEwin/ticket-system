@@ -12,7 +12,7 @@ const ticketsSchema = zod
   })
   .array();
 
-export default async function getTickets() {
+export default async function useGetTickets() {
   const getTickets = await supabase.from("tickets").select("*");
 
   const response = ticketsSchema.safeParse(getTickets.data);
