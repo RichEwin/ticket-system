@@ -12,7 +12,7 @@ const ticketsSchema = zod
   })
   .array();
 
-export default async function useGetTickets() {
+async function useGetTickets() {
   const getTickets = await supabase.from("tickets").select("*");
 
   const response = ticketsSchema.safeParse(getTickets.data);
@@ -21,5 +21,19 @@ export default async function useGetTickets() {
     throw new Error(response.error.message);
   }
 
-  return response;
+  return response.data;
 }
+
+async function useGetTicketById(id: number) {
+  const getTicket = await supabase.from("tickets").select("*").eq("id", id);
+
+  const response = ticketsSchema.safeParse(getTicket.data);
+
+  if (!response.success) {
+    throw new Error(response.error.message);
+  }
+
+  return response.data;
+}
+
+export { useGetTickets, useGetTicketById as useGetTicket };
