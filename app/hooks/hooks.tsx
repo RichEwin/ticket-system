@@ -1,16 +1,5 @@
 import supabase from "@/utils/supabase";
-import zod from "zod";
-
-const ticketsSchema = zod
-  .object({
-    id: zod.number(),
-    created_at: zod.string(),
-    title: zod.string(),
-    body: zod.string(),
-    priority: zod.string(),
-    user_email: zod.string().email(),
-  })
-  .array();
+import { CreateTicketFormState, ticketsSchema } from "../schema";
 
 async function useGetTickets() {
   const getTickets = await supabase.from("tickets").select("*");
@@ -36,4 +25,14 @@ async function useGetTicketById(id: number) {
   return response.data;
 }
 
-export { useGetTickets, useGetTicketById as useGetTicket };
+async function useCreateTicket(data: CreateTicketFormState) {
+  const { error } = await supabase.from("tickets").insert([data]);
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  return "success";
+}
+
+export { useGetTickets, useGetTicketById, useCreateTicket };

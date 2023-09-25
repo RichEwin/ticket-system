@@ -1,5 +1,5 @@
 import React from "react";
-import { useGetTicket } from "@/app/hooks/hooks";
+import { useGetTicketById } from "@/app/hooks/hooks";
 
 interface TicketDetailProps {
   params: {
@@ -10,7 +10,7 @@ interface TicketDetailProps {
 export default async function TicketDetail({ params }: TicketDetailProps) {
   const { id } = params;
 
-  const ticket = await useGetTicket(id);
+  const ticket = await useGetTicketById(id);
 
   return (
     <>
