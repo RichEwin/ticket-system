@@ -21,6 +21,7 @@ export default function CreateTicketForm() {
     const result = await useCreateTicket(data);
 
     if (result === "success") {
+      router.refresh();
       router.push("/tickets");
     }
   };
