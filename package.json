@@ -22,5 +22,8 @@
     "react-hook-form": "^7.46.2",
     "typescript": "5.1.6",
     "zod": "^3.22.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.38.1"
   }
 }

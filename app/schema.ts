@@ -6,7 +6,11 @@ export const ticketsSchema = zod
     created_at: zod.string(),
     title: zod.string(),
     body: zod.string(),
-    priority: zod.string(),
+    priority: zod.union([
+      zod.literal("low"),
+      zod.literal("medium"),
+      zod.literal("high"),
+    ]),
     user_email: zod.string().email(),
   })
   .array();
