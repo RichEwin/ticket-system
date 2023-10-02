@@ -35,4 +35,14 @@ async function useCreateTicket(data: CreateTicketFormState) {
   return "success";
 }
 
-export { useGetTickets, useGetTicketById, useCreateTicket };
+async function useDeleteTicket(id: number) {
+  const { error } = await supabase.from("tickets").delete().eq("id", id);
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  return "success";
+}
+
+export { useGetTickets, useGetTicketById, useCreateTicket, useDeleteTicket };

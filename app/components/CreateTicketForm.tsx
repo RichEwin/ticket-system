@@ -1,7 +1,7 @@
 "use client";
 
 import { useForm } from "react-hook-form";
-import { CreateTicketFormState, createTicketSchema } from "../schema";
+import { CreateTicketFormState, createTicketFormSchema } from "../schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useCreateTicket } from "../hooks/hooks";
 import { useRouter } from "next/navigation";
@@ -14,7 +14,7 @@ export default function CreateTicketForm() {
     handleSubmit,
     formState: { isValid },
   } = useForm<CreateTicketFormState>({
-    resolver: zodResolver(createTicketSchema),
+    resolver: zodResolver(createTicketFormSchema),
   });
 
   const onSubmit = async (data: CreateTicketFormState) => {
@@ -22,13 +22,13 @@ export default function CreateTicketForm() {
 
     if (result === "success") {
       router.refresh();
-      router.push("/tickets");
+      router.push("/");
     }
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: "1em" }}>
         <input {...register("title")} placeholder="Title" />
         <input {...register("body")} placeholder="Body" />
         <input {...register("priority")} placeholder="Priority" />

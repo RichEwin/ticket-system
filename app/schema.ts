@@ -15,7 +15,7 @@ export const ticketsSchema = zod
   })
   .array();
 
-export const createTicketSchema = zod.object({
+export const createTicketFormSchema = zod.object({
   title: zod.string(),
   body: zod.string(),
   priority: zod.union([
@@ -26,4 +26,5 @@ export const createTicketSchema = zod.object({
   user_email: zod.string().email(),
 });
 
-export type CreateTicketFormState = zod.infer<typeof createTicketSchema>;
+export type CreateTicketFormState = zod.infer<typeof createTicketFormSchema>;
+export type Ticket = zod.infer<typeof ticketsSchema>;
